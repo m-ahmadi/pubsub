@@ -40,24 +40,25 @@ Another example:
 ----------------------
 ```javascript
 var t = newPubSub();
+var log = console.log;
 
-t.on("click", function () { alert(1); });
+t.on("click", function () { log(1); });
 t.on({
-"a": function () { alert("a"); },
-"b": function () { alert("b"); }
+"a": function () { log("a"); },
+"b": function () { log("b"); }
 });
 t.on({
 "mohammad": {
-	fn: function (e, par) { alert("mohammad"+par); },
+	fn: function (e, par) { log("mohammad"+par); },
 	par: "choo"
 },
 "meow": {
-	fn: function (e, par) { alert("meow"+par); },
+	fn: function (e, par) { log("meow"+par); },
 	par: 2,
 	once: true
 }
 });
-t.once("moo", function () { alert("mooo and done"); });
+t.once("moo", function () { log("mooo and done"); });
 
 t.emit("click");
 t.emit("a");
