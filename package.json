@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/m-ahmadi/pubsub.git#npm-module"
+    "url": "git+https://github.com/m-ahmadi/pubsub.git"
   },
   "keywords": [],
   "author": "Mohammad Ahmadi",
