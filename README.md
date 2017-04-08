@@ -1,6 +1,7 @@
 ## Publish-Subscribe Pattern. (Aka: Observer, Custom-Events)
 ```javascript
-var obj = newPubSub();
+// var newPubSub = require("pubsub-ma"); // node
+var obj = newPubSub(); // browser
 
 obj.on("init", function (evtData, customData) {
 
