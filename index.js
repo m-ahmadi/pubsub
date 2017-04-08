@@ -1,7 +1,16 @@
-var newPubSub = (function () {
+(function (exported) {
+	if (typeof define === "function" && define.amd) {
+		define(exported);
+	} else if (typeof process !== "undefined" &&
+			   typeof process.versions.node !== "undefined") {
+		module.exports = exported; 
+	} else {
+		window.newPubSub = exported;
+	}
+}((function () {
 	function constructor() {
 		"use strict";
-		if ( this instanceof newPubSub ) { throw new Error('newPubSub() was called with new.'); }
+		if ( this instanceof constructor ) { throw new Error("constructor() was called with new."); }
 		
 		var subscribers = {},
 			inst = {};	
@@ -159,4 +168,4 @@ var newPubSub = (function () {
 	}
 	
 	return constructor;
-}());
+}())));
