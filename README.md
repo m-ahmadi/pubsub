@@ -21,15 +21,15 @@ Usage exmaple:
 ```javascript
 var door = newPubSub();
 door.on("opened", function (e) {
-	if (!e.doorstop) {
-		putDoorstop();
-	}
+    if (!e.doorstop) {
+        putDoorstop();
+    }
 });
 door.on("closed", function (e, whoWantsToKnow) {
-	if (!e.locked) {
-		lockTheDoor();
-	}
-	call( whoWantsToKnow );
+    if (!e.locked) {
+        lockTheDoor();
+    }
+    call( whoWantsToKnow );
 }, "mohammad");
 
 
@@ -49,15 +49,15 @@ t.on({
 	"b": function () { log("b"); }
 });
 t.on({
-	"mohammad": {
-		fn: function (e, par) { log("mohammad"+par); },
-		par: "choo"
-	},
-	"meow": {
-		fn: function (e, par) { log("meow"+par); },
-		par: 2,
-		once: true
-	}
+    "mohammad": {
+        fn: function (e, par) { log("mohammad"+par); },
+        par: "choo"
+        },
+    "meow": {
+        fn: function (e, par) { log("meow"+par); },
+        par: 2,
+        once: true
+    }
 });
 t.once("moo", function () { log("mooo and done"); });
 
