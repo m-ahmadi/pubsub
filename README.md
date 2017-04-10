@@ -5,8 +5,8 @@ var obj = newPubSub(); // browser
 
 obj.on("init", function (evtData, customData) {
 
-	// evtData: A value provided by the publisher. (whoever emitted this event)
-	// customData: A value provided by the subscriber. (whoever subscribed to this event)
+    // evtData: A value provided by the publisher. (whoever emitted this event)
+    // customData: A value provided by the subscriber. (whoever subscribed to this event)
 
 } [, customData]);
 
@@ -45,8 +45,8 @@ var log = console.log;
 
 t.on("click", function () { log(1); });
 t.on({
-	"a": function () { log("a"); },
-	"b": function () { log("b"); }
+    "a": function () { log("a"); },
+    "b": function () { log("b"); }
 });
 t.on({
     "mohammad": {
