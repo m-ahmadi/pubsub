@@ -5,8 +5,8 @@ var obj = newPubSub(); // browser
 
 obj.on("init", function (evtData, customData) {
 
-// evtData: A value provided by the publisher. (whoever emitted this event)
-// customData: A value provided by the subscriber. (whoever subscribed to this event)
+	// evtData: A value provided by the publisher. (whoever emitted this event)
+	// customData: A value provided by the subscriber. (whoever subscribed to this event)
 
 } [, customData]);
 
