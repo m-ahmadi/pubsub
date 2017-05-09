@@ -52,7 +52,7 @@ t.on({
     "mohammad": {
         fn: function (e, par) { log("mohammad"+par); },
         par: "choo"
-        },
+	},
     "meow": {
         fn: function (e, par) { log("meow"+par); },
         par: 2,

@@ -1,0 +1,23 @@
+{
+  "name": "pubsub-ma",
+  "description": "Pure JavaScript Publish-Subscribe (Aka: Observer, Custom-Events) Pattern.",
+  "main": "index.js",
+  "authors": [
+    "Mohammad Ahmadi"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "pubsub",
+    "observer",
+    "custom-events",
+    "publish-subscribe"
+  ],
+  "homepage": "https://github.com/m-ahmadi/pubsub",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

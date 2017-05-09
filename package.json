@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/m-ahmadi/pubsub.git"
   },
-  "keywords": [],
+  "keywords": ["pubsub", "observer", "custom-events", "publish-subscribe"],
   "author": "Mohammad Ahmadi",
   "license": "MIT",
   "bugs": {
