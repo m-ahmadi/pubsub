@@ -76,7 +76,7 @@ Another example:
 var t = newPubSub();
 var log = console.log;
 
-t.on("foo", function(a,b,c,d,e,f) { log(a,b,c,d,e,f) }, "bar");
+t.on("foo", function (a,b,c,d,e,f) { log(a,b,c,d,e,f) }, "bar");
 t.emit("foo")          // "bar" undefined undefined undefined undefined undefined
 t.emit("foo", 1, 2, 3) // 1 2 3 "bar" undefined undefined
 t.emit("foo", [])      // [1, 2, 3] "bar" undefined undefined undefined undefined
