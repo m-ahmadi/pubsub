@@ -68,3 +68,21 @@ t.emit("mohammad");
 t.emit("meow"); // deleted after one publish
 t.emit("moo");  // deleted after one publish
 ```
+
+
+Another example:
+----------------------
+```javascript
+var t = newPubSub();
+var log = console.log;
+
+t.on("foo", function(a,b,c,d,e,f) { log(a,b,c,d,e,f) }, "bar");
+t.emit("foo")          // "bar" undefined undefined undefined undefined undefined
+t.emit("foo", 1, 2, 3) // 1 2 3 "bar" undefined undefined
+t.emit("foo", [])      // [1, 2, 3] "bar" undefined undefined undefined undefined
+
+var t = newPubSub();
+t.on("foo", function (a,b,c,d,e,f) { log(a,b,c,d,e,f) }, ["fudge", "bar", "pickle"])
+t.emit("foo")          // ["fudge", "bar", "pickle"] undefined undefined undefined undefined undefined
+t.emit("foo", 1, 2, 3) // 1 2 3 ["fudge", "bar", "pickle"] undefined undefined
+```

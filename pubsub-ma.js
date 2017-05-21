@@ -94,6 +94,11 @@
 				}
 			}
 		}
+		function call(fn, e, par) {
+			// if isArr par => e = e.concat(par) else:
+			e.push(par);
+			fn.apply(undefined, e);
+		}
 		
 		inst.getSubscribers = function () {
 			return subscribers;
@@ -114,16 +119,17 @@
 				arr.splice(target, 1);
 			}
 		}
-		inst.publish = function (evtName, evtData) {
+		inst.publish = function (evtName) {
+			var evtData = getArgs(arguments).slice(1);
 			var evts = subscribers[evtName],
 				toDel;
 			if ( !isUndef(evts) ) {
 				evts.forEach(function (i, idx) {
 					if (i.once) {
-						i.fn(evtData, i.par);
+						call(i.fn, evtData, i.par);
 						toDel = evtName;
 					} else {
-						i.fn(evtData, i.par);
+						call(i.fn, evtData, i.par);
 					}
 				});
 				delete subscribers[toDel];
@@ -158,6 +164,20 @@
 			Object.prototype.toString.call(v) === '[object Object]'
 		) ? true : false;
 	}
+	function isArr(v) {
+        if ( typeof Array.isArray === "function" ) {
+            return Array.isArray(v);
+        } else {
+            return (
+                v &&
+                typeof v === "object" &&
+                typeof v.length === "number" &&
+                typeof v.splice === "function" &&
+                !v.propertyIsEnumerable("length") &&
+                Object.prototype.toString.call(v) === "[object Array]"
+            ) ? true : false;
+        }
+    }
 	function getArgs(a) {
 		var args = new Array(a.length),
 			i;
