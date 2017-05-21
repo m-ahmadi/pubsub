@@ -1,6 +1,6 @@
 {
   "name": "pubsub-ma",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Pure JavaScript Publish-Subscribe (Aka: Observer, Custom-Events) Pattern.",
   "main": "pubsub-ma.js",
   "scripts": {

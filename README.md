@@ -52,7 +52,7 @@ t.on({
     "mohammad": {
         fn: function (e, par) { log("mohammad"+par); },
         par: "choo"
-	},
+    },
     "meow": {
         fn: function (e, par) { log("meow"+par); },
         par: 2,
@@ -77,12 +77,12 @@ var t = newPubSub();
 var log = console.log;
 
 t.on("foo", function (a,b,c,d,e,f) { log(a,b,c,d,e,f) }, "bar");
-t.emit("foo")          // "bar" undefined undefined undefined undefined undefined
-t.emit("foo", 1, 2, 3) // 1 2 3 "bar" undefined undefined
-t.emit("foo", [])      // [1, 2, 3] "bar" undefined undefined undefined undefined
+t.emit("foo")            // "bar" undefined undefined undefined undefined undefined
+t.emit("foo", 1, 2, 3)   // 1 2 3 "bar" undefined undefined
+t.emit("foo", [1, 2, 3]) // [1, 2, 3] "bar" undefined undefined undefined undefined
 
 var t = newPubSub();
 t.on("foo", function (a,b,c,d,e,f) { log(a,b,c,d,e,f) }, ["fudge", "bar", "pickle"])
-t.emit("foo")          // ["fudge", "bar", "pickle"] undefined undefined undefined undefined undefined
-t.emit("foo", 1, 2, 3) // 1 2 3 ["fudge", "bar", "pickle"] undefined undefined
+t.emit("foo")            // ["fudge", "bar", "pickle"] undefined undefined undefined undefined undefined
+t.emit("foo", 1, 2, 3)   // 1 2 3 ["fudge", "bar", "pickle"] undefined undefined
 ```
