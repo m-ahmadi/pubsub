@@ -11,6 +11,17 @@ obj.on("init", function (evtData, customData) {
 } [, customData]);
 
 obj.emit("init", evtData);
+
+// methods
+.getSubscribers(                                                   )
+.subscribe     ( strEvtName, fnEvtCallback, anyToPassToEvtCallback )
+.unsubscribe   ( strEvtName, fnEvtCallback                         )
+.publish       ( strEvtName, anyEvtData,    anyEvtData, ...        )
+.once          ( strEvtName, fnEvtCallback, anyToPassToEvtCallback )
+.on            (                                                   ) // subscribe alias
+.off           (                                                   ) // unsubscribe alias
+.emit          (                                                   ) // publish alias
+
 ```
 #### The newPubSub() function will create an object that has the capability of registering subscribers, and publishing events to them.
 
