@@ -16,10 +16,10 @@
             inst = {};
 
         function initArr(str) {
-                if ( isUndef( subscribers[str] ) ) {
-                    subscribers[str] = [];
-                }
-            }
+			if ( isUndef( subscribers[str] ) ) {
+				subscribers[str] = [];
+			}
+		}
         function add(str, fn, par, once) {
             var obj = {};
             initArr(str);
@@ -118,6 +118,16 @@
                 });
                 arr.splice(target, 1);
             }
+			
+			if ( isStr(evtName) && isUndef(fn) ) {
+				delete subscribers[evtName];
+			}
+			
+			if ( isUndef(evtName) && isUndef(fn) ) {
+				Object.keys(subscribers).forEach(function (k) {
+					delete subscribers[k];
+				});
+			}
         }
         inst.publish = function (evtName) {
             var evtData = getArgs(arguments).slice(1);
