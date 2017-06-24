@@ -153,7 +153,7 @@
             arg1 = args[0];
             arg2 = args[1];
             arg3 = args[2];
-            if ( isStr(arg1) && isFn(arg2) && arg3 ) {
+            if ( isStr(arg1) && isFn(arg2) && !isUndef(arg3) ) {
                 action2(arg1, arg2, arg3, opt ? opt : undefined);
             }
         } else if (len === 4) {
@@ -161,7 +161,7 @@
             arg2 = args[1];
             arg3 = args[2];
             arg4 = args[3];
-            if ( isStr(arg1) && isFn(arg2) && arg3 && arg4 ) {
+            if ( isStr(arg1) && isFn(arg2) && !isUndef(arg3) && !isUndef(arg4) ) {
                 action2(arg1, arg2, arg3, arg4);
             }
         }
