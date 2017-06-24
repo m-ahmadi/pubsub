@@ -113,9 +113,8 @@
                         call(i.fn, evtData, i.par);
                     }
                 });
-                delete subscribers[toDel];
+                if (toDel) delete subscribers[toDel];
             }
-            return inst;
         };
         inst.once = function () {
             var args = getArgs(arguments);
