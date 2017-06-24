@@ -16,10 +16,10 @@
             inst = {};
 
         function initArr(str) {
-			if ( isUndef( subscribers[str] ) ) {
-				subscribers[str] = [];
-			}
-		}
+            if ( isUndef( subscribers[str] ) ) {
+                subscribers[str] = [];
+            }
+        }
         function add(str, fn, par, once) {
             var obj = {};
             initArr(str);
@@ -65,7 +65,7 @@
         inst.subscribe = function (evt, fn, par, once) {
             var args = getArgs(arguments);
             check(args, oneArg, common);
-			return inst;
+            return inst;
         };
         inst.unsubscribe = function (evtName, fn) {
             var arr = subscribers[evtName],
@@ -78,17 +78,17 @@
                 });
                 arr.splice(target, 1);
             }
-			
-			if ( isStr(evtName) && isUndef(fn) ) {
-				delete subscribers[evtName];
-			}
-			
-			if ( isUndef(evtName) && isUndef(fn) ) {
-				Object.keys(subscribers).forEach(function (k) {
-					delete subscribers[k];
-				});
-			}
-			return inst;
+
+            if ( isStr(evtName) && isUndef(fn) ) {
+                delete subscribers[evtName];
+            }
+
+            if ( isUndef(evtName) && isUndef(fn) ) {
+                Object.keys(subscribers).forEach(function (k) {
+                    delete subscribers[k];
+                });
+            }
+            return inst;
         }
         inst.publish = function (evtName) {
             var evtData = getArgs(arguments).slice(1);
@@ -105,12 +105,12 @@
                 });
                 delete subscribers[toDel];
             }
-			return inst;
+            return inst;
         };
         inst.once = function () {
             var args = getArgs(arguments);
             check(args, oneArg, common, true);
-			return inst;
+            return inst;
         };
         // aliases
         inst.on = inst.subscribe;
@@ -119,49 +119,49 @@
 
         return inst;
     };
-	
-	function check(args, action1, action2, opt) {
-		var len = args.length,
-			arg1, arg2, arg3, arg4;
 
-		if (len === 1) {
-			arg1 = args[0];
-			if ( isObj(arg1) ) {
-				action1(arg1);
-			}
-		} else if (len === 2) {
-			arg1 = args[0];
-			arg2 = args[1];
-			if ( isStr(arg1) && isFn(arg2) ) {
-				if (opt) {
-					action2(arg1, arg2, undefined, true);
-				} else {
-					action2(arg1, arg2);
-				}
-			}
-		} else if (len === 3) {
-			arg1 = args[0];
-			arg2 = args[1];
-			arg3 = args[2];
-			if ( isStr(arg1) && isFn(arg2) && arg3 ) {
-				action2(arg1, arg2, arg3, opt ? opt : undefined);
-			}
-		} else if (len === 4) {
-			arg1 = args[0];
-			arg2 = args[1];
-			arg3 = args[2];
-			arg4 = args[3];
-			if ( isStr(arg1) && isFn(arg2) && arg3 && arg4 ) {
-				action2(arg1, arg2, arg3, arg4);
-			}
-		}
-	}
-	function call(fn, e, par) {
-		// if isArr par => e = e.concat(par) else:
-		e.push(par);
-		fn.apply(undefined, e);
-	}
-	
+    function check(args, action1, action2, opt) {
+        var len = args.length,
+            arg1, arg2, arg3, arg4;
+
+        if (len === 1) {
+            arg1 = args[0];
+            if ( isObj(arg1) ) {
+                action1(arg1);
+            }
+        } else if (len === 2) {
+            arg1 = args[0];
+            arg2 = args[1];
+            if ( isStr(arg1) && isFn(arg2) ) {
+                if (opt) {
+                    action2(arg1, arg2, undefined, true);
+                } else {
+                    action2(arg1, arg2);
+                }
+            }
+        } else if (len === 3) {
+            arg1 = args[0];
+            arg2 = args[1];
+            arg3 = args[2];
+            if ( isStr(arg1) && isFn(arg2) && arg3 ) {
+                action2(arg1, arg2, arg3, opt ? opt : undefined);
+            }
+        } else if (len === 4) {
+            arg1 = args[0];
+            arg2 = args[1];
+            arg3 = args[2];
+            arg4 = args[3];
+            if ( isStr(arg1) && isFn(arg2) && arg3 && arg4 ) {
+                action2(arg1, arg2, arg3, arg4);
+            }
+        }
+    }
+    function call(fn, e, par) {
+        // if isArr par => e = e.concat(par) else:
+        e.push(par);
+        fn.apply(undefined, e);
+    }
+
     function isUndef(v) {
         return typeof v === 'undefined';
     }

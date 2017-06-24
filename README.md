@@ -1,4 +1,10 @@
-## Publish-Subscribe Pattern. (Aka: Observer, Custom-Events)
+## Publish-Subscribe Pattern/API. (Aka: Observer | Custom-Events | EventEmitter)
+
+The newPubSub() function will create an object that has the capability of registering subscribers, and publishing events to them.
+
+
+If any important object needs this functionality, it can inhert from the object created with newPubSub().
+
 ```javascript
 // var newPubSub = require("pubsub-ma"); // node
 var obj = newPubSub(); // browser
@@ -23,9 +29,6 @@ obj.emit("init", evtData);
 .emit          (                                                   ) // publish alias
 
 ```
-#### The newPubSub() function will create an object that has the capability of registering subscribers, and publishing events to them.
-
-#### If any important object needs this functionality, it can inhert from the object created with newPubSub().
 
 Usage exmaple:
 ----------------------
