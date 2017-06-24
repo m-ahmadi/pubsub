@@ -70,7 +70,7 @@
         inst.unsubscribe = function (evtName, fn) {
             var arr = subscribers[evtName],
                 target,
-				splitted;
+                splitted;
             if ( isStr(evtName) && isFn(fn) ) {
                 arr.forEach(function (itm, idx) {
                     if ( itm.fn.toString() === fn.toString() ) {
@@ -79,21 +79,21 @@
                 });
                 arr.splice(target, 1);
             } else if ( isStr(evtName) && isUndef(fn) ) {
-				splitted = evtName.split(" ");
-				if (splitted.length) {
-					splitted.forEach(function (i) {
-						 delete subscribers[i];
-					});
-				} else {
-					delete subscribers[evtName];
-				}
-			} else if ( isArr(evtName) && isUndef(fn) ) {
-				evtName.forEach(function (i) {
-					 if ( isStr(i) ) {
-						 delete subscribers[i];
-					 }
-				});
-			} else if ( isUndef(evtName) && isUndef(fn) ) {
+                splitted = evtName.split(" ");
+                if (splitted.length) {
+                    splitted.forEach(function (i) {
+                         delete subscribers[i];
+                    });
+                } else {
+                    delete subscribers[evtName];
+                }
+            } else if ( isArr(evtName) && isUndef(fn) ) {
+                evtName.forEach(function (i) {
+                     if ( isStr(i) ) {
+                         delete subscribers[i];
+                     }
+                });
+            } else if ( isUndef(evtName) && isUndef(fn) ) {
                 Object.keys(subscribers).forEach(function (k) {
                     delete subscribers[k];
                 });
