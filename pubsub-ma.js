@@ -34,10 +34,10 @@
         }
         function common(evt, fn, par, once) {
             var events;
-            if ( evt.indexOf(' ') === -1 ) { // "click", function () {}
+            if ( evt.indexOf(" ") === -1 ) { // "click", function () {}
                 add(evt, fn, par, once);
             } else { // "click mousemove", function () {}
-                events = evt.trim().split(' ');
+                events = evt.trim().split(" ");
                 if (events.length) {
                     events.forEach(function (itm) {
                         add(itm, fn, par, once);
@@ -69,7 +69,8 @@
         };
         inst.unsubscribe = function (evtName, fn) {
             var arr = subscribers[evtName],
-                target;
+                target,
+				splitted;
             if ( isStr(evtName) && isFn(fn) ) {
                 arr.forEach(function (itm, idx) {
                     if ( itm.fn.toString() === fn.toString() ) {
@@ -77,13 +78,22 @@
                     }
                 });
                 arr.splice(target, 1);
-            }
-
-            if ( isStr(evtName) && isUndef(fn) ) {
-                delete subscribers[evtName];
-            }
-
-            if ( isUndef(evtName) && isUndef(fn) ) {
+            } else if ( isStr(evtName) && isUndef(fn) ) {
+				splitted = evtName.split(" ");
+				if (splitted.length) {
+					splitted.forEach(function (i) {
+						 delete subscribers[i];
+					});
+				} else {
+					delete subscribers[evtName];
+				}
+			} else if ( isArr(evtName) && isUndef(fn) ) {
+				evtName.forEach(function (i) {
+					 if ( isStr(i) ) {
+						 delete subscribers[i];
+					 }
+				});
+			} else if ( isUndef(evtName) && isUndef(fn) ) {
                 Object.keys(subscribers).forEach(function (k) {
                     delete subscribers[k];
                 });
@@ -163,20 +173,20 @@
     }
 
     function isUndef(v) {
-        return typeof v === 'undefined';
+        return typeof v === "undefined";
     }
     function isFn(v) {
-        return typeof v === 'function';
+        return typeof v === "function";
     }
     function isStr(v) {
-        return typeof v === 'string';
+        return typeof v === "string";
     }
     function isObj(v) {
         return (
             v &&
-            typeof v === 'object' &&
+            typeof v === "object" &&
             typeof v !== null &&
-            Object.prototype.toString.call(v) === '[object Object]'
+            Object.prototype.toString.call(v) === "[object Object]"
         ) ? true : false;
     }
     function isArr(v) {
