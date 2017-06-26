@@ -65,7 +65,7 @@
         inst.subscribe = function (evt, fn, par, once) {
             var args = getArgs(arguments);
             check(args, oneArg, common);
-            return inst;
+            return this;
         };
         inst.unsubscribe = function (evtName, fn) {
             var arr = subscribers[evtName],
@@ -98,7 +98,7 @@
                     delete subscribers[k];
                 });
             }
-            return inst;
+            return this;
         }
         inst.publish = function (evtName) {
             var evtData = getArgs(arguments).slice(1);
@@ -119,7 +119,7 @@
         inst.once = function () {
             var args = getArgs(arguments);
             check(args, oneArg, common, true);
-            return inst;
+            return this;
         };
         // aliases
         inst.on = inst.subscribe;
