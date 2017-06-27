@@ -24,7 +24,7 @@
             var obj = {};
             initArr(str);
             obj.fn = fn;
-            if (par) {
+            if ( !isUndef(par) ) {
                 obj.par = par;
             }
             if (once) {
