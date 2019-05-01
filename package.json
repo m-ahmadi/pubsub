@@ -1,6 +1,6 @@
 {
   "name": "pubsub-ma",
-  "version": "1.2.15",
+  "version": "1.2.16",
   "description": "Pure JavaScript Publish-Subscribe (Aka: Observer, Custom-Events) Pattern.",
   "main": "pubsub-ma.js",
   "scripts": {
@@ -10,7 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/m-ahmadi/pubsub.git"
   },
-  "keywords": ["pubsub", "observer", "custom-events", "publish-subscribe"],
+  "keywords": [
+    "pubsub",
+    "observer",
+    "custom-events",
+    "publish-subscribe"
+  ],
   "author": "Mohammad Ahmadi",
   "license": "MIT",
   "bugs": {
