@@ -1,36 +1,50 @@
-## Publish-Subscribe Pattern/API. (Aka: Observer | Custom-Events | EventEmitter)
+## Publish-Subscribe Pattern. (Aka: Observer or Event Emitter)
 
-The newPubSub() function will create an object that has the capability of registering subscribers, and publishing events to them.
-
-
-If any important object needs this functionality, it can inhert from the object created with newPubSub().
+The `newPubSub()` function will create an object that has the capability of registering subscribers, and publishing events to them.
+You can then inhert from the object created with `newPubSub()`.
 
 ```javascript
 // var newPubSub = require("pubsub-ma"); // node
 var obj = newPubSub(); // browser
 
-obj.on("init", function (evtData, customData) {
+obj.on("init", function (eventData, customData) {
 
-    // evtData: A value provided by the publisher. (whoever emitted this event)
+    // eventtData: A value provided by the publisher. (whoever emitted this event)
     // customData: A value provided by the subscriber. (whoever subscribed to this event)
 
 } [, customData]);
 
 obj.emit("init", evtData);
+```
 
-// methods
-.getSubscribers(                                                   )
-.subscribe     ( strEvtName, fnEvtCallback, anyToPassToEvtCallback )
-.unsubscribe   ( strEvtName, fnEvtCallback                         )
-.publish       ( strEvtName, anyEvtData,    anyEvtData, ...        )
-.once          ( strEvtName, fnEvtCallback, anyToPassToEvtCallback )
-.on            (                                                   ) // subscribe alias
-.off           (                                                   ) // unsubscribe alias
-.emit          (                                                   ) // publish alias
+Methods:
+----------------------
+```javascript
+.on(strEvtName, fnEventHandler [, anyToPassToEventHandler])     // register an event handler to an event name.
+.emit(strEvtName [, anyEventData, anyEventData, ...])           // call all registered event handlers of an event name.
+
+.off(strEventName, fnEventHandler)                              // unregister an event handler from an event name.
+.once(strEventName, fnEventHandler [, anyToPassToEventHandler]) // register an event handler to be called only once.
+
+.getSubscribers()                                               // get a list of all subscribers.
+```
+
+Basic usage:
+----------------------
+```javascript
+var brain = Object.create( newPubSub() );
+
+brain.on("hunger", function (event) {
+    if (event.hungerLevel === "super_high") {
+        killFriendAndEatHim();
+    } else {
+        eatSomeCheetos();
+    }
+});
 
 ```
 
-Usage exmaple:
+Basic usage - another example:
 ----------------------
 ```javascript
 var door = newPubSub();
@@ -51,17 +65,28 @@ door.emit("opened", {doorStop: false});
 door.emit("closed", {locked: false});
 ```
 
-Another example:
+Different argument signatures of `newPubSub().on()`
 ----------------------
 ```javascript
 var t = newPubSub();
 var log = console.log;
 
+// basic:
 t.on("click", function () { log(1); });
+
+// one object argument.
+// keys of the object are event names.
+// values of the object are event handlers.
 t.on({
     "a": function () { log("a"); },
     "b": function () { log("b"); }
 });
+
+// one object argument.
+// keys of the object are event names.
+// values of the object are object themselves with two properties:
+//   `fn` is the event handler.
+//   `par` is a value to pass to the event handler.
 t.on({
     "mohammad": {
         fn: function (e, par) { log("mohammad"+par); },
@@ -73,6 +98,7 @@ t.on({
         once: true
     }
 });
+
 t.once("moo", function () { log("mooo and done"); });
 
 t.emit("click");
@@ -84,19 +110,19 @@ t.emit("moo");  // deleted after one publish
 ```
 
 
-Another example:
+Two ways of passing data to event handlers,
+when calling `.on()` or when calling `.emit()`:
 ----------------------
 ```javascript
 var t = newPubSub();
-var log = console.log;
+t.on("foo", function (a,b,c,d) { console.log(a,b,c,d) }, "bar")
 
-t.on("foo", function (a,b,c,d,e,f) { log(a,b,c,d,e,f) }, "bar");
-t.emit("foo")            // "bar" undefined undefined undefined undefined undefined
-t.emit("foo", 1, 2, 3)   // 1 2 3 "bar" undefined undefined
-t.emit("foo", [1, 2, 3]) // [1, 2, 3] "bar" undefined undefined undefined undefined
+t.emit("foo")            // "bar" undefined undefined undefined
+t.emit("foo", 1, 2, 3)   // 1 2 3 "bar"
+t.emit("foo", [1, 2, 3]) // [1, 2, 3] "bar" undefined undefined
 
 var t = newPubSub();
-t.on("foo", function (a,b,c,d,e,f) { log(a,b,c,d,e,f) }, ["fudge", "bar", "pickle"])
-t.emit("foo")            // ["fudge", "bar", "pickle"] undefined undefined undefined undefined undefined
-t.emit("foo", 1, 2, 3)   // 1 2 3 ["fudge", "bar", "pickle"] undefined undefined
+t.on("foo", function (a,b,c,d) { console.log(a,b,c,d) }, [true, false, true])
+t.emit("foo")            // [true, false, true] undefined undefined undefined
+t.emit("foo", 1, 2, 3)   // 1 2 3 [true, false, true]
 ```

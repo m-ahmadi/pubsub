@@ -1,7 +1,7 @@
 {
   "name": "pubsub-ma",
-  "version": "1.2.16",
-  "description": "Pure JavaScript Publish-Subscribe (Aka: Observer, Custom-Events) Pattern.",
+  "version": "1.2.17",
+  "description": "Publish-Subscribe Pattern. (Aka: Observer or Event Emitter)",
   "main": "pubsub-ma.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,6 +1,6 @@
 {
   "name": "pubsub-ma",
-  "description": "Pure JavaScript Publish-Subscribe (Aka: Observer, Custom-Events) Pattern.",
+  "description": "Publish-Subscribe Pattern. (Aka: Observer or Event Emitter)",
   "main": "index.js",
   "authors": [
     "Mohammad Ahmadi"
