@@ -1,6 +1,6 @@
 {
   "name": "pubsub-ma",
-  "version": "1.2.18",
+  "version": "1.2.19",
   "description": "Publish-Subscribe Pattern. (Aka: Observer or Event Emitter)",
   "main": "pubsub-ma.js",
   "scripts": {
