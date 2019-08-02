@@ -1,27 +1,26 @@
 ## Publish-Subscribe Pattern. (Aka: Observer or Event Emitter)
 
-The `newPubSub()` function will create an object that has the capability of registering subscribers, and publishing events to them.
-You can then inhert from the object created with `newPubSub()`.
+The `newPubSub()` function will create an object that has the capability of registering subscribers and publishing events to them, you can then inhert from the object created with `newPubSub()`.
 
 ```javascript
-// var newPubSub = require("pubsub-ma"); // node
 var obj = newPubSub(); // browser
+// var newPubSub = require("pubsub-ma"); // node
 
 obj.on("init", function (eventData, customData) {
 
-    // eventtData: A value provided by the publisher. (whoever emitted this event)
+    // eventData: A value provided by the publisher. (whoever emitted this event)
     // customData: A value provided by the subscriber. (whoever subscribed to this event)
 
 } [, customData]);
 
-obj.emit("init", evtData);
+obj.emit("init", eventData);
 ```
 
 Methods:
 ----------------------
 ```javascript
-.on(strEvtName, fnEventHandler [, anyToPassToEventHandler])     // register an event handler to an event name.
-.emit(strEvtName [, anyEventData, anyEventData, ...])           // call all registered event handlers of an event name.
+.on(strEventName, fnEventHandler [, anyToPassToEventHandler])   // register an event handler to an event name.
+.emit(strEventName [, anyEventData, anyEventData, ...])         // call all registered event handlers of an event name.
 
 .off(strEventName, fnEventHandler)                              // unregister an event handler from an event name.
 .once(strEventName, fnEventHandler [, anyToPassToEventHandler]) // register an event handler to be called only once.
