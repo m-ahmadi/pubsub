@@ -1,9 +1,8 @@
 
 # Publish-Subscribe Pattern
-**(Aka: Observer or Event Emitter)**
+**Aka: Observer or Event Emitter.**
 
 The `newPubSub()` function will create an object that has the capability of registering subscribers and publishing events to them.  
-
 You can then inhert from the object created with `newPubSub()`.
 
 ```javascript
@@ -107,7 +106,6 @@ t.emit("mohammad");
 t.emit("meow"); // deleted after one publish
 t.emit("moo");  // deleted after one publish
 ```
-
 
 ## Two ways of passing data to event handlers: when calling `.on()` or when calling `.emit()`:
 ```javascript
