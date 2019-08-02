@@ -11,7 +11,7 @@ var obj = newPubSub(); // browser
 
 obj.on("init", function (eventData, customData) {
 
-    // eventData: A value provided by the publisher. (whoever emitted this event)
+    // eventData:  A value provided by the publisher.  (whoever emitted       this event)
     // customData: A value provided by the subscriber. (whoever subscribed to this event)
 
 } [, customData]);
@@ -47,11 +47,13 @@ brain.on("hunger", function (event) {
 ## Another basic usage:
 ```javascript
 var door = newPubSub();
+
 door.on("opened", function (e) {
     if (!e.doorstop) {
         putDoorstop();
     }
 });
+
 door.on("closed", function (e, whoWantsToKnow) {
     if (!e.locked) {
         lockTheDoor();
@@ -59,9 +61,8 @@ door.on("closed", function (e, whoWantsToKnow) {
     call( whoWantsToKnow );
 }, "mohammad");
 
-
-door.emit("opened", {doorStop: false});
-door.emit("closed", {locked: false});
+door.emit("opened", { doorStop: false });
+door.emit("closed", { locked: false });
 ```
 
 ## Different argument signatures of `newPubSub().on()`
@@ -82,9 +83,10 @@ t.on({
 
 // one object argument.
 // keys of the object are event names.
-// values of the object are object themselves with two properties:
-//   `fn` is the event handler.
-//   `par` is a value to pass to the event handler.
+// values of the object are object themselves with three properties:
+//   fn:   a function which is the event handler.
+//   par:  a value to pass to the event handler.
+//   once: a boolean value indicating whether the event handler should be called only once.
 t.on({
     "mohammad": {
         fn: function (e, par) { log("mohammad"+par); },
@@ -110,14 +112,13 @@ t.emit("moo");  // deleted after one publish
 ## Two ways of passing data to event handlers: when calling `.on()` or when calling `.emit()`:
 ```javascript
 var t = newPubSub();
-t.on("foo", function (a,b,c,d) { console.log(a,b,c,d) }, "bar")
-
-t.emit("foo")            // "bar" undefined undefined undefined
-t.emit("foo", 1, 2, 3)   // 1 2 3 "bar"
-t.emit("foo", [1, 2, 3]) // [1, 2, 3] "bar" undefined undefined
+t.on("foo", function (a,b,c,d) { console.log(a,b,c,d) }, "bar");
+t.emit("foo");            // "bar" undefined undefined undefined
+t.emit("foo", 1, 2, 3);   // 1 2 3 "bar"
+t.emit("foo", [1, 2, 3]); // [1, 2, 3] "bar" undefined undefined
 
 var t = newPubSub();
-t.on("foo", function (a,b,c,d) { console.log(a,b,c,d) }, [true, false, true])
-t.emit("foo")            // [true, false, true] undefined undefined undefined
-t.emit("foo", 1, 2, 3)   // 1 2 3 [true, false, true]
+t.on("foo", function (a,b,c,d) { console.log(a,b,c,d) }, [true, false, true]);
+t.emit("foo");            // [true, false, true] undefined undefined undefined
+t.emit("foo", 1, 2, 3);   // 1 2 3 [true, false, true]
 ```
