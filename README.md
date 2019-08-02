@@ -1,6 +1,10 @@
-## Publish-Subscribe Pattern. (Aka: Observer or Event Emitter)
 
-The `newPubSub()` function will create an object that has the capability of registering subscribers and publishing events to them, you can then inhert from the object created with `newPubSub()`.
+# Publish-Subscribe Pattern
+**(Aka: Observer or Event Emitter)**
+
+The `newPubSub()` function will create an object that has the capability of registering subscribers and publishing events to them.  
+
+You can then inhert from the object created with `newPubSub()`.
 
 ```javascript
 var obj = newPubSub(); // browser
@@ -16,8 +20,7 @@ obj.on("init", function (eventData, customData) {
 obj.emit("init", eventData);
 ```
 
-Methods:
-----------------------
+## Methods:
 ```javascript
 .on(strEventName, fnEventHandler [, anyToPassToEventHandler])   // register an event handler to an event name.
 .emit(strEventName [, anyEventData, anyEventData, ...])         // call all registered event handlers of an event name.
@@ -28,8 +31,7 @@ Methods:
 .getSubscribers()                                               // get a list of all subscribers.
 ```
 
-Basic usage:
-----------------------
+## Basic usage:
 ```javascript
 var brain = Object.create( newPubSub() );
 
@@ -43,8 +45,7 @@ brain.on("hunger", function (event) {
 
 ```
 
-Basic usage - another example:
-----------------------
+## Another basic usage:
 ```javascript
 var door = newPubSub();
 door.on("opened", function (e) {
@@ -64,8 +65,7 @@ door.emit("opened", {doorStop: false});
 door.emit("closed", {locked: false});
 ```
 
-Different argument signatures of `newPubSub().on()`
-----------------------
+## Different argument signatures of `newPubSub().on()`
 ```javascript
 var t = newPubSub();
 var log = console.log;
@@ -109,9 +109,7 @@ t.emit("moo");  // deleted after one publish
 ```
 
 
-Two ways of passing data to event handlers,
-when calling `.on()` or when calling `.emit()`:
-----------------------
+## Two ways of passing data to event handlers: when calling `.on()` or when calling `.emit()`:
 ```javascript
 var t = newPubSub();
 t.on("foo", function (a,b,c,d) { console.log(a,b,c,d) }, "bar")
