@@ -22,6 +22,16 @@ obj.emit("init", eventData);
 ## Methods:
 ```javascript
 .on(strEventName, fnEventHandler [, anyToPassToEventHandler])   // register an event handler to an event name.
+.on({ "eventName": fnEventHandler, ... })                       // alternative signature 1
+.on({                                                           // alternative signature 2
+    "eventName": {
+        fn: eventHandler,
+        par: anyToPassToEventHandler,
+        once: boolExecuteHandlerOnlyOnce
+    },
+    ...
+})
+
 .emit(strEventName [, anyEventData, anyEventData, ...])         // call all registered event handlers of an event name.
 
 .off(strEventName, fnEventHandler)                              // unregister an event handler from an event name.
@@ -73,7 +83,7 @@ var log = console.log;
 // basic:
 t.on("click", function () { log(1); });
 
-// one object argument.
+// alternative 1 - one object argument:
 // keys of the object are event names.
 // values of the object are event handlers.
 t.on({
@@ -81,7 +91,7 @@ t.on({
     "b": function () { log("b"); }
 });
 
-// one object argument.
+// alternative 2 - one object argument:
 // keys of the object are event names.
 // values of the object are object themselves with three properties:
 //   fn:   a function which is the event handler.
