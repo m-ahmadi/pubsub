@@ -133,6 +133,6 @@ t.emit("foo");            // [true, false, true] undefined undefined undefined
 t.emit("foo", 1, 2, 3);   // 1 2 3 [true, false, true]
 
 function eventHandler(a,b,c,d) {
-	console.log(a,b,c,d);
+    console.log(a,b,c,d);
 }
 ```
