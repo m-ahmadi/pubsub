@@ -122,13 +122,17 @@ t.emit("moo");  // deleted after one publish
 ## Two ways of passing data to event handlers: when calling `.on()` or when calling `.emit()`:
 ```javascript
 var t = newPubSub();
-t.on("foo", function (a,b,c,d) { console.log(a,b,c,d) }, "bar");
+t.on("foo", eventHandler, "bar");
 t.emit("foo");            // "bar" undefined undefined undefined
 t.emit("foo", 1, 2, 3);   // 1 2 3 "bar"
 t.emit("foo", [1, 2, 3]); // [1, 2, 3] "bar" undefined undefined
 
 var t = newPubSub();
-t.on("foo", function (a,b,c,d) { console.log(a,b,c,d) }, [true, false, true]);
+t.on("foo", eventHandler, [true, false, true]);
 t.emit("foo");            // [true, false, true] undefined undefined undefined
 t.emit("foo", 1, 2, 3);   // 1 2 3 [true, false, true]
+
+function eventHandler(a,b,c,d) {
+	console.log(a,b,c,d);
+}
 ```
