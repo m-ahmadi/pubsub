@@ -1,16 +1,16 @@
 (function (exported) {
-    if (typeof define === "function" && define.amd) {
+    if (typeof define === 'function' && define.amd) {
         define(exported);
-    } else if (typeof process !== "undefined" &&
-               typeof process.versions.node !== "undefined") {
+    } else if (typeof process !== 'undefined' &&
+               typeof process.versions.node !== 'undefined') {
         module.exports = exported;
     } else {
         window.newPubSub = exported;
     }
 }((function () {
     function constructor() {
-        "use strict";
-        if ( this instanceof constructor ) { throw new Error("constructor() was called with new."); }
+        'use strict';
+        if ( this instanceof constructor ) { throw new Error('constructor() was called with new.'); }
 
         var subscribers = {},
             inst = {};
@@ -34,10 +34,10 @@
         }
         function common(evt, fn, par, once) {
             var events;
-            if ( evt.indexOf(" ") === -1 ) { // "click", function () {}
+            if ( evt.indexOf(' ') === -1 ) { // 'click', function () {}
                 add(evt, fn, par, once);
-            } else { // "click mousemove", function () {}
-                events = evt.trim().split(" ");
+            } else { // 'click mousemove', function () {}
+                events = evt.trim().split(' ');
                 if (events.length) {
                     events.forEach(function (itm) {
                         add(itm, fn, par, once);
@@ -49,9 +49,9 @@
             Object.keys(o).forEach(function (i) {
                 var prop = o[i];
                 initArr(i);
-                if ( isFn(prop) ) { // "click": function () {}
+                if ( isFn(prop) ) { // 'click': function () {}
                     add(i, prop);
-                } else if ( isObj(prop) ) { // "click": {fn: function () {}, par: value, once: true}
+                } else if ( isObj(prop) ) { // 'click': {fn: function () {}, par: value, once: true}
                     if ( isFn(prop.fn) ) {
                         add(i, prop.fn, prop.par, prop.once);
                     }
@@ -79,7 +79,7 @@
                 });
                 arr.splice(target, 1);
             } else if ( isStr(evtName) && isUndef(fn) ) {
-                splitted = evtName.split(" ");
+                splitted = evtName.split(' ');
                 if (splitted.length) {
                     splitted.forEach(function (i) {
                          delete subscribers[i];
@@ -172,33 +172,33 @@
     }
 
     function isUndef(v) {
-        return typeof v === "undefined";
+        return typeof v === 'undefined';
     }
     function isFn(v) {
-        return typeof v === "function";
+        return typeof v === 'function';
     }
     function isStr(v) {
-        return typeof v === "string";
+        return typeof v === 'string';
     }
     function isObj(v) {
         return (
             v &&
-            typeof v === "object" &&
+            typeof v === 'object' &&
             typeof v !== null &&
-            Object.prototype.toString.call(v) === "[object Object]"
+            Object.prototype.toString.call(v) === '[object Object]'
         ) ? true : false;
     }
     function isArr(v) {
-        if ( typeof Array.isArray === "function" ) {
+        if ( typeof Array.isArray === 'function' ) {
             return Array.isArray(v);
         } else {
             return (
                 v &&
-                typeof v === "object" &&
-                typeof v.length === "number" &&
-                typeof v.splice === "function" &&
-                !v.propertyIsEnumerable("length") &&
-                Object.prototype.toString.call(v) === "[object Array]"
+                typeof v === 'object' &&
+                typeof v.length === 'number' &&
+                typeof v.splice === 'function' &&
+                !v.propertyIsEnumerable('length') &&
+                Object.prototype.toString.call(v) === '[object Array]'
             ) ? true : false;
         }
     }
