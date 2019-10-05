@@ -1,4 +1,3 @@
-
 # Publish-Subscribe Pattern
 **Aka: Observer or Event Emitter.**
 
@@ -7,24 +6,24 @@ You can then inhert from the object created with `newPubSub()`.
 
 ```javascript
 var obj = newPubSub(); // browser
-// var newPubSub = require("pubsub-ma"); // node
+// var newPubSub = require('pubsub-ma'); // node
 
-obj.on("init", function (eventData, customData) {
+obj.on('init', function (eventData, customData) {
 
     // eventData:  A value provided by the publisher.  (whoever emitted       this event)
     // customData: A value provided by the subscriber. (whoever subscribed to this event)
 
 } [, customData]);
 
-obj.emit("init", eventData);
+obj.emit('init', eventData);
 ```
 
 ## Methods:
 ```javascript
 .on(strEventName, fnEventHandler [, anyToPassToEventHandler])   // register an event handler to an event name.
-.on({ "eventName": fnEventHandler, ... })                       // alternative signature 1
+.on({ 'eventName': fnEventHandler, ... })                       // alternative signature 1
 .on({                                                           // alternative signature 2
-    "eventName": {
+    'eventName': {
         fn: eventHandler,
         par: anyToPassToEventHandler,
         once: boolExecuteHandlerOnlyOnce
@@ -44,8 +43,8 @@ obj.emit("init", eventData);
 ```javascript
 var brain = Object.create( newPubSub() );
 
-brain.on("hunger", function (event) {
-    if (event.hungerLevel === "super_high") {
+brain.on('hunger', function (event) {
+    if (event.hungerLevel === 'super_high') {
         killFriendAndEatHim();
     } else {
         eatSomeCheetos();
@@ -54,41 +53,41 @@ brain.on("hunger", function (event) {
 
 ```
 
-## Another basic usage:
+### Another example:
 ```javascript
 var door = newPubSub();
 
-door.on("opened", function (e) {
+door.on('opened', function (e) {
     if (!e.doorstop) {
         putDoorstop();
     }
 });
 
-door.on("closed", function (e, whoWantsToKnow) {
+door.on('closed', function (e, whoWantsToKnow) {
     if (!e.locked) {
         lockTheDoor();
     }
     call( whoWantsToKnow );
-}, "mohammad");
+}, 'mohammad');
 
-door.emit("opened", { doorStop: false });
-door.emit("closed", { locked: false });
+door.emit('opened', { doorStop: false });
+door.emit('closed', { locked: false });
 ```
 
-## Different argument signatures of `newPubSub().on()`
+### Different argument signatures of `newPubSub().on()`:
 ```javascript
 var t = newPubSub();
 var log = console.log;
 
 // basic:
-t.on("click", function () { log(1); });
+t.on('click', function () { log(1); });
 
 // alternative 1 - one object argument:
 // keys of the object are event names.
 // values of the object are event handlers.
 t.on({
-    "a": function () { log("a"); },
-    "b": function () { log("b"); }
+    'a': function () { log('a'); },
+    'b': function () { log('b'); }
 });
 
 // alternative 2 - one object argument:
@@ -98,39 +97,39 @@ t.on({
 //   par:  a value to pass to the event handler.
 //   once: a boolean value indicating whether the event handler should be called only once.
 t.on({
-    "mohammad": {
-        fn: function (e, par) { log("mohammad"+par); },
-        par: "choo"
+    'mohammad': {
+        fn: function (e, par) { log('mohammad'+par); },
+        par: 'choo'
     },
-    "meow": {
-        fn: function (e, par) { log("meow"+par); },
+    'meow': {
+        fn: function (e, par) { log('meow'+par); },
         par: 2,
         once: true
     }
 });
 
-t.once("moo", function () { log("mooo and done"); });
+t.once('moo', function () { log('mooo and done'); });
 
-t.emit("click");
-t.emit("a");
-t.emit("b");
-t.emit("mohammad");
-t.emit("meow"); // deleted after one publish
-t.emit("moo");  // deleted after one publish
+t.emit('click');
+t.emit('a');
+t.emit('b');
+t.emit('mohammad');
+t.emit('meow'); // deleted after one publish
+t.emit('moo');  // deleted after one publish
 ```
 
-## Two ways of passing data to event handlers: when calling `.on()` or when calling `.emit()`:
+### Two ways of passing data to event handlers:  when calling `.on()` or  `.emit()`:
 ```javascript
 var t = newPubSub();
-t.on("foo", eventHandler, "bar");
-t.emit("foo");            // "bar" undefined undefined undefined
-t.emit("foo", 1, 2, 3);   // 1 2 3 "bar"
-t.emit("foo", [1, 2, 3]); // [1, 2, 3] "bar" undefined undefined
+t.on('foo', eventHandler, 'bar');
+t.emit('foo');            // 'bar' undefined undefined undefined
+t.emit('foo', 1, 2, 3);   // 1 2 3 'bar'
+t.emit('foo', [1, 2, 3]); // [1, 2, 3] 'bar' undefined undefined
 
 var t = newPubSub();
-t.on("foo", eventHandler, [true, false, true]);
-t.emit("foo");            // [true, false, true] undefined undefined undefined
-t.emit("foo", 1, 2, 3);   // 1 2 3 [true, false, true]
+t.on('foo', eventHandler, [true, false, true]);
+t.emit('foo');            // [true, false, true] undefined undefined undefined
+t.emit('foo', 1, 2, 3);   // 1 2 3 [true, false, true]
 
 function eventHandler(a, b, c, d) {
     console.log(a, b, c, d);
