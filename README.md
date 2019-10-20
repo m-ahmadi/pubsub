@@ -1,3 +1,5 @@
+[![NPM](https://nodei.co/npm/pubsub-ma.png)](https://nodei.co/npm/pubsub-ma@latest/)  
+[![install size](https://packagephobia.now.sh/badge?p=pubsub-ma@latest)](https://packagephobia.now.sh/result?p=pubsub-ma@latest)
 # Publish-Subscribe Pattern
 **Aka: Observer or Event Emitter.**
 
